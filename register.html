@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - HealthCare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>HealthCare</h1>
+        <nav>
+            <a href="index.html">Accueil</a>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-card">
+            <h2>Créer un compte</h2>
+            <p>Rejoignez la plateforme HealthCare dès aujourd'hui</p>
+            <form action="process_register.php" method="POST">
+                <div class="form-group">
+                    <input type="text" name="nom" placeholder="Nom" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="prenom" placeholder="Prénom" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="habitation" placeholder="Lieu d'habitation" required>
+                </div>
+                <div class="form-group">
+                    <select name="sexe" required>
+                        <option value="" disabled selected>Sexe</option>
+                        <option value="M">Masculin</option>
+                        <option value="F">Féminin</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="contact" placeholder="Numéro de contact" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" placeholder="Votre email" required>
+                    <span id="email-feedback" class="feedback-text"></span>
+                </div>
+                <div class="form-group password-group">
+                    <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+                    <span class="toggle-password" id="toggleBtn">👁️</span>
+                </div>
+                <div class="form-group password-group">
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmer le mot de passe" required>
+                    <span class="toggle-password" id="toggleConfirmBtn">👁️</span>
+                </div>
+                <span id="match-feedback" class="feedback-text"></span>
+                <div class="password-strength-meter">
+                    <div class="strength-bar-container">
+                        <div id="strength-bar"></div>
+                    </div>
+                    <span id="strength-text"></span>
+                </div>
+                <button type="submit" class="btn-primary">S'inscrire</button>
+            </form>
+            <p class="auth-footer">Déjà un compte ? <a href="login.html">Se connecter</a></p>
+        </div>
+    </main>
+
+    <script>
+        // Validation Email en temps réel
+        const emailInput = document.querySelector('#email');
+        const emailFeedback = document.querySelector('#email-feedback');
+
+        emailInput.addEventListener('input', function() {
+            const val = emailInput.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (val.length === 0) {
+                emailFeedback.textContent = '';
+                emailInput.style.borderColor = '#ddd';
+            } else if (emailRegex.test(val)) {
+                emailFeedback.textContent = 'Format d\'email valide';
+                emailFeedback.style.color = '#2ed573';
+                emailInput.style.borderColor = '#2ed573';
+            } else {
+                emailFeedback.textContent = 'Format d\'email invalide';
+                emailFeedback.style.color = '#ff4757';
+                emailInput.style.borderColor = '#ff4757';
+            }
+        });
+
+        const toggleBtn = document.querySelector('#toggleBtn');
+        const passwordInput = document.querySelector('#password');
+        const strengthBar = document.querySelector('#strength-bar');
+        const strengthText = document.querySelector('#strength-text');
+        const confirmPasswordInput = document.querySelector('#confirm_password');
+        const matchFeedback = document.querySelector('#match-feedback');
+        const toggleConfirmBtn = document.querySelector('#toggleConfirmBtn');
+
+        toggleConfirmBtn.addEventListener('click', function() {
+            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        function validateMatch() {
+            const p1 = passwordInput.value;
+            const p2 = confirmPasswordInput.value;
+            
+            if (p2.length === 0) {
+                matchFeedback.textContent = '';
+                confirmPasswordInput.style.borderColor = '#ddd';
+            } else if (p1 === p2) {
+                matchFeedback.textContent = 'Les mots de passe correspondent';
+                matchFeedback.style.color = '#2ed573';
+                confirmPasswordInput.style.borderColor = '#2ed573';
+            } else {
+                matchFeedback.textContent = 'Les mots de passe ne correspondent pas';
+                matchFeedback.style.color = '#ff4757';
+                confirmPasswordInput.style.borderColor = '#ff4757';
+            }
+        }
+
+        confirmPasswordInput.addEventListener('input', validateMatch);
+
+        toggleBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        passwordInput.addEventListener('input', function() {
+            validateMatch();
+            const val = passwordInput.value;
+            let score = 0;
+
+            if (val.length > 0) {
+                if (val.length >= 8) score++;      // Longueur suffisante
+                if (/[A-Z]/.test(val)) score++;     // Majuscule
+                if (/[0-9]/.test(val)) score++;     // Chiffre
+                if (/[^A-Za-z0-9]/.test(val)) score++; // Caractère spécial
+            }
+
+            strengthBar.className = ''; // Réinitialise les classes
+            
+            if (val.length === 0) {
+                strengthText.textContent = '';
+                strengthBar.style.width = '0%';
+            } else if (score <= 1) {
+                strengthBar.classList.add('strength-weak');
+                strengthText.textContent = 'Faible';
+                strengthText.style.color = '#ff4757';
+            } else if (score <= 3) {
+                strengthBar.classList.add('strength-medium');
+                strengthText.textContent = 'Moyen';
+                strengthText.style.color = '#ffa502';
+            } else {
+                strengthBar.classList.add('strength-strong');
+                strengthText.textContent = 'Fort';
+                strengthText.style.color = '#2ed573';
+            }
+        });
+    </script>
+</body>
+</html>

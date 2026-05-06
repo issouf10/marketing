@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare - Gestion de Santé Moderne</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header>
+        <h1>HealthCare</h1>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="#features">Fonctionnalités</a>
+            <a href="facilities.php">Hôpitaux & Pharmacies</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <video autoplay muted loop playsinline id="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-medical-analysis-of-a-patient-in-a-hospital-41162-large.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h2>Gérez vos services de santé facilement</h2>
+            <p>Votre plateforme de santé intelligente et sécurisée.</p>
+            <div class="hero-buttons">
+                <a href="instructions.html" class="btn-hero secondary">Voir les Instructions</a>
+                <a href="login.html" class="btn-hero">Connexion / S'inscrire</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features">
+        <h2>Nos Fonctionnalités</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Gestion des patients</h3>
+                <p>Suivez l'historique médical complet en quelques clics.</p>
+            </div>
+            <div class="card">
+                <h3>Suivi des rendez-vous</h3>
+                <p>Optimisez votre emploi du temps intelligemment.</p>
+            </div>
+            <div class="card">
+                <h3>Statistiques</h3>
+                <p>Visualisez vos performances en temps réel.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+        <h2>Contactez-nous</h2>
+        <form action="contact.php" method="POST">
+            <input type="text" name="nom" placeholder="Votre Nom" required>
+            <input type="email" name="email" placeholder="Votre Email" required>
+            <textarea name="message" placeholder="Votre Message" required></textarea>
+            <button type="submit" class="btn-primary">Envoyer le message</button>
+        </form>
+    </section>
+</body>
+</html>

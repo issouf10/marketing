@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Healthcare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Healthcare</h1>
+        <nav>
+            <a href="index.html">Accueil</a>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-card">
+            <h2>Bon retour !</h2>
+            <p>Connectez-vous à votre compte santé</p>
+            <form action="process_login.php" method="POST">
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Votre email" required>
+                </div>
+                <div class="form-group password-group">
+                    <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+                    <span class="toggle-password" id="toggleBtn">👁️</span>
+                </div>
+                <button type="submit" class="btn-primary">Se connecter</button>
+            </form>
+            <p class="auth-footer">Pas encore de compte ? <a href="register.html">S'inscrire</a></p>
+        </div>
+    </main>
+
+    <script>
+        const toggleBtn = document.querySelector('#toggleBtn');
+        const passwordInput = document.querySelector('#password');
+
+        toggleBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+    </script>
+</body>
+</html>

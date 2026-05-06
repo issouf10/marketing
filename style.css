@@ -1,0 +1,278 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* NAVBAR */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: #0a3d62;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-login, .btn-primary {
+    background: #00a8cc; /* Un bleu médical plus moderne et doux */
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background: #0a3d62;
+}
+
+/* HERO AVEC VIDÉO */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    background: #000; /* Fond noir pendant le chargement de la vidéo */
+}
+
+/* Calque pour assombrir la vidéo et améliorer la lisibilité */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(10, 61, 98, 0.7), rgba(0, 168, 204, 0.5));
+    z-index: 1;
+}
+
+#hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Place le texte au-dessus du calque */
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn-hero {
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+    background: #00a8cc;
+    color: white;
+}
+
+.btn-hero.secondary {
+    background: rgba(255, 255, 255, 0.15); /* Effet de verre */
+    border: 2px solid white;
+    backdrop-filter: blur(5px);
+}
+
+.features{
+padding:40px;
+text-align:center;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px #ccc;
+}
+
+/* AUTH PAGE & FORMS */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.auth-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-card h2 {
+    margin-bottom: 10px;
+    color: #0a3d62;
+}
+
+.password-group {
+    position: relative;
+    width: 100%;
+}
+
+.password-group input {
+    padding-right: 45px; /* Laisse de la place pour l'icône */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    user-select: none;
+    z-index: 10;
+}
+
+form, .contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+textarea {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 100px;
+}
+
+input, select {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #00a8cc;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+.cards {
+flex-direction: column;
+}
+header {
+flex-direction: column;
+text-align: center;
+}
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Styles pour la table des messages de contact */
+.contact-messages-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.contact-messages-table th,
+.contact-messages-table td {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: left;
+}
+
+.contact-messages-table th {
+    background-color: #f0f4f8;
+    font-weight: bold;
+}
+
+.contact-messages-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Barre de force du mot de passe */
+.password-strength-meter {
+    margin-bottom: 10px;
+    text-align: left;
+}
+.strength-bar-container {
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+#strength-bar {
+    height: 100%;
+    width: 0;
+    transition: 0.3s ease;
+}
+#strength-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.strength-weak { background-color: #ff4757; width: 33% !important; }
+.strength-medium { background-color: #ffa502; width: 66% !important; }
+.strength-strong { background-color: #2ed573; width: 100% !important; }
+
+/* Feedback de validation */
+.feedback-text {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    text-align: left;
+    font-weight: 500;
+}
